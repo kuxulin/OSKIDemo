@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSKIDemo", "OSKIDemo.csproj", "{F1065FAB-CDFB-4462-B3B4-C4CB994EDA06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1065FAB-CDFB-4462-B3B4-C4CB994EDA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1065FAB-CDFB-4462-B3B4-C4CB994EDA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1065FAB-CDFB-4462-B3B4-C4CB994EDA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1065FAB-CDFB-4462-B3B4-C4CB994EDA06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A2ACDE0-5580-45AB-9C44-C821877368C3}
+	EndGlobalSection
+EndGlobal
