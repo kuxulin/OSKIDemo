@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OSKIDemo.Models;
 
@@ -7,7 +6,7 @@ namespace OSKIDemo.Data;
 
 public class DataContext : IdentityDbContext<ApplicationUser>
 {
-    public DataContext(DbContextOptions<DataContext> options) :base(options) { }
+    public DataContext(DbContextOptions options) : base(options) { }
 
     DbSet<Test> Tests { get; set; }
     DbSet<Question> Questions { get; set; }
