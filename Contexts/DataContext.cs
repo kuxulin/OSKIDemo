@@ -8,9 +8,9 @@ public class DataContext : IdentityDbContext<ApplicationUser>
 {
     public DataContext(DbContextOptions options) : base(options) { }
 
-    DbSet<Test> Tests { get; set; }
-    DbSet<Question> Questions { get; set; }
-    DbSet<Answer> Answers { get; set; }
+    public DbSet<Test> Tests { get; set; }
+    public DbSet<Question> Questions { get; set; }
+    public DbSet<Answer> Answers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
