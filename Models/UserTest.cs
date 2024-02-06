@@ -7,4 +7,5 @@ public class UserTest
     public Guid TestId { get; set; }
     public Test Test { get; set; }
     public int Mark {  get; set; }
+    public bool IsCompleted { get; set; }
 }

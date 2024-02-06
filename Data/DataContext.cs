@@ -11,6 +11,7 @@ public class DataContext : IdentityDbContext<ApplicationUser>
     public DbSet<Test> Tests { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
+    public DbSet<UserTest> UserTests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,9 +29,5 @@ public class DataContext : IdentityDbContext<ApplicationUser>
             .HasOne(ut => ut.Test)
             .WithMany(t => t.UserTests)
             .HasForeignKey(ut => ut.TestId);
-
-        builder.Entity<Question>()
-            .HasMany(q => q.Answers)
-            .WithOne(a => a.Question);
     }
 }

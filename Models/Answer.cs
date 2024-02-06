@@ -1,9 +1,11 @@
-﻿namespace OSKIDemo.Models;
+﻿using System.Text.Json.Serialization;
 
-public class Answer
+namespace OSKIDemo.Models;
+
+public class Answer : BaseEntity
 {
-    public Guid Id { get; set; }
     public Guid QuestionId { get; set; }
+    [JsonIgnore]
     public Question Question { get; set; }
     public string Text { get; set; }
     public bool IsRight { get; set; }

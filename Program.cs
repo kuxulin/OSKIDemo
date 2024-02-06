@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OSKIDemo.Contexts;
 using OSKIDemo.Data;
 using OSKIDemo.Interfaces;
 using OSKIDemo.Models;
@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen(swagger =>
 builder.Services.AddDbContext<DataContext>(options =>
          options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
 
-builder.Services.AddIdentityCore<ApplicationUser>(options=>
+builder.Services.AddIdentityCore<ApplicationUser>(options =>
     {
         options.Password.RequireDigit = false;
         options.Password.RequireNonAlphanumeric = false;
@@ -68,19 +68,27 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddAuthorization();
-
-builder.Services.AddScoped<ITokenService,TokenService>();
-
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ITestService, TestService>();
+builder.Services.AddScoped<IUserService, UserService>();
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await DbInitializer.Initialize(services);
+}
+
 
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "Hello World!");
-app.MapControllers();
+//app.MapGet("/", () => "Hello World!");
+
 
 app.Run();
