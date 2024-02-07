@@ -1,0 +1,5 @@
+To run in two Docker containers:
+- Create an image of existing project (change connectionString in Program.cs to docker one and name it according to docker-compose file in the project)
+- pull 2022-latest sql server image
+- type this command (in solution directory):
+docker-compose up
