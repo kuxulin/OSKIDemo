@@ -269,9 +269,6 @@ namespace OSKIDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<TimeSpan>("CompletionTime")
-                        .HasColumnType("time");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -289,6 +286,9 @@ namespace OSKIDemo.Migrations
                     b.Property<Guid>("TestId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Mark")
                         .HasColumnType("int");
 
@@ -296,7 +296,7 @@ namespace OSKIDemo.Migrations
 
                     b.HasIndex("TestId");
 
-                    b.ToTable("UserTest");
+                    b.ToTable("UserTests");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

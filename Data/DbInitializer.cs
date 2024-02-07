@@ -10,7 +10,8 @@ public static class DbInitializer
     {
         var context = services.GetRequiredService<DataContext>();
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-        
+        context.Database.EnsureCreated();
+
         if (context.Tests.Any()) return;
 
         var users = new ApplicationUser[]
@@ -36,7 +37,7 @@ public static class DbInitializer
                 Text = "answer(wrong)",
                 IsRight = false,
                 QuestionId = question.Id
-                
+
             };
             var answer2 = new Answer()
             {
@@ -71,8 +72,7 @@ public static class DbInitializer
                 UserId = user.Id,
                 TestId = test2.Id,
             };
-            user.UserTests.Add(userTest1);
-            user.UserTests.Add(userTest2);
+            user.UserTests = new List<UserTest>() { userTest1, userTest2 };
         }
 
         context.Tests.AddRange(test1, test2);

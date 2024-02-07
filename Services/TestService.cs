@@ -3,7 +3,7 @@ using OSKIDemo.Models.ViewModels;
 
 namespace OSKIDemo.Services;
 
-public sealed class TestService : ITestService
+public class TestService : ITestService
 {
 
     private readonly IUserRepository _userRepository;
@@ -19,7 +19,7 @@ public sealed class TestService : ITestService
         var possibleUser = await _userRepository.GetUserAsync(userId);
 
         if (possibleUser == null)
-            throw new Exception("User doesnt exist in database!");
+            throw new NullReferenceException("User doesnt exist in database!");
 
         var userTests = await _testRepository.GetTestsOwnedByUserAsync(userId);
 
@@ -31,7 +31,7 @@ public sealed class TestService : ITestService
         var test = await _testRepository.GetTestByIdAsync(testId);
 
         if (test == null) 
-            throw new Exception("There is no such test in database!");
+            throw new NullReferenceException("There is no such test in database!");
 
         return test;
     }
@@ -41,7 +41,7 @@ public sealed class TestService : ITestService
         var userTest = await _testRepository.GetUserTestAsync(passTestViewModel.TestId, passTestViewModel.UserId);
 
         if (userTest == null || userTest.IsCompleted) 
-            throw new Exception("Can`t find incompleted test in db!");
+            throw new NullReferenceException("Can`t find incompleted test in db!");
 
         await _testRepository.PassTestAsync(userTest, passTestViewModel.AnswerIds);
     }
@@ -51,7 +51,7 @@ public sealed class TestService : ITestService
         var userTest =  await _testRepository.GetUserTestAsync(testId, userId);
 
         if (userTest is null && !userTest.IsCompleted)
-            throw new Exception("Can`t find completed user test in database!");
+            throw new NullReferenceException("Can`t find completed user test in database!");
 
         return userTest.Mark;
     }

@@ -6,6 +6,7 @@ using OSKIDemo.Contexts;
 using OSKIDemo.Data;
 using OSKIDemo.Interfaces;
 using OSKIDemo.Models;
+using OSKIDemo.Repositories;
 using OSKIDemo.Services;
 using System.Text;
 
@@ -36,10 +37,11 @@ builder.Services.AddSwaggerGen(swagger =>
     };
 
     swagger.AddSecurityRequirement(securityRequirements);
+    swagger.EnableAnnotations();
 });
 
 builder.Services.AddDbContext<DataContext>(options =>
-         options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
+         options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionLocalString"))); 
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
     {
@@ -70,7 +72,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ITestService, TestService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITestRepository, TestRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -79,16 +83,19 @@ using (var scope = app.Services.CreateScope())
     await DbInitializer.Initialize(services);
 }
 
+app.UseStaticFiles();
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("./swagger/v1/swagger.json", " ");
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.UseSwagger();
-app.UseSwaggerUI();
 app.UseHttpsRedirection();
-
-//app.MapGet("/", () => "Hello World!");
-
 
 app.Run();
