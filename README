@@ -3,3 +3,4 @@ To run in two Docker containers:
 - pull 2022-latest sql server image
 - type this command (in solution directory):
 docker-compose up
+Here we have two containers, one with sql server, other with our web api
