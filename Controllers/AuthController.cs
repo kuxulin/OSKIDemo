@@ -23,28 +23,6 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost]
-    [Route("register")]
-    public async Task<IActionResult> Register(RegisterViewModel model)
-    {
-        ApplicationUser possibleUser = await _userManager.FindByNameAsync(model.Login);
-
-        if (possibleUser != null)
-            return BadRequest("User already exists!");
-
-        ApplicationUser user = new()
-        {
-            UserName = model.Login,
-        };
-
-        IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-
-        if (!result.Succeeded)
-            return StatusCode(500,"User creation failed!" );
-
-        return Ok("User created successfully!");
-    }
-
-    [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
@@ -62,20 +40,6 @@ public class AuthController : ControllerBase
             });
         }
 
-        return Unauthorized();
-    }
-
-    [HttpGet]
-    [Route("check-username-unique")]
-    public async Task<IActionResult> CheckLoginUnique(string username)
-    {
-
-        var user = await _userManager.FindByNameAsync(username);
-        if (user != null)
-        {
-            return BadRequest("This username is not unique!");
-        }
-
-        return Ok("This username is unique");
+        return Unauthorized("There were some troubles with provided login or password");
     }
 }

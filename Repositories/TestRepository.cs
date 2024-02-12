@@ -6,7 +6,7 @@ using OSKIDemo.Models.ViewModels;
 
 namespace OSKIDemo.Repositories;
 
-public class TestRepository :ITestRepository
+public class TestRepository : ITestRepository
 {
     private readonly DataContext _dataContext;
 
@@ -28,14 +28,16 @@ public class TestRepository :ITestRepository
                     IsCompleted = ut.IsCompleted,
                 })).ToListAsync();
 
+        var s = (Test x) => x.Questions.Count < 10 ? 11 : 12;
+        var usersdfsd = _dataContext.Tests.OrderBy(s);
         return userTests;
     }
 
     public async Task<UserTest> GetUserTestAsync(Guid testId, Guid userId)
     {
-       var userTest = await _dataContext.UserTests
-            .Where(ut => ut.TestId == testId && ut.UserId == userId.ToString())
-            .FirstOrDefaultAsync();
+        var userTest = await _dataContext.UserTests
+             .Where(ut => ut.TestId == testId && ut.UserId == userId.ToString())
+             .FirstOrDefaultAsync();
 
         return userTest;
     }

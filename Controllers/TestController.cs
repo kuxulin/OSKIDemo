@@ -24,7 +24,7 @@ public class TestController : ControllerBase
         return Ok(tests);
     }
 
-    [HttpGet("test")]
+    [HttpGet("get-test")]
     [SwaggerOperation(Description = "Get required test questions and answers for test passing page")]
     public async Task<IActionResult> GetTestById(Guid testId)
     {
