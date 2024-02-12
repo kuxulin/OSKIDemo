@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="login-form">
+    <i>Signing in window</i>
+    <label for="login-input"> Print login:</label>
+    <input type="text" id="login-input" [(ngModel)]="login" />
+    <label for="password-input">Pring password:</label>
+    <input type="text" id="password-input" [(ngModel)]="password" />
+    <button (click)="signIn()" [disabled]="!checkFields()">Submit</button>
+  </div>
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>

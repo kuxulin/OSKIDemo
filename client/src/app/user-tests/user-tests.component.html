@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="user-tests-header">Here are your tests:</div>
+  <div class="user-tests-body">
+    <div *ngFor="let test of tests" class="test">
+      <div style="grid-column: 1/2">{{ test.name }}</div>
+      <div style="grid-column: 3">
+        {{ test.isCompleted ? "Completed" : "Incompleted" }}
+      </div>
+      <div style="grid-column: 4">{{ test.isCompleted ? test.mark : "" }}</div>
+      <button
+        style="grid-column: 5"
+        [disabled]="test.isCompleted"
+        [routerLink]="['/tests', test.id]"
+      >
+        Pass
+      </button>
+    </div>
+  </div>
+</div>

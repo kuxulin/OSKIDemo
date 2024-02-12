@@ -1,0 +1,24 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border: thick double black;
+
+  .login-form {
+    padding: 1%;
+    column-gap: 5px;
+    border: solid black;
+    display: flex;
+    flex-direction: column;
+    * {
+      margin-bottom: 10%;
+    }
+  }
+
+  .error-message {
+    padding: 3% 1%;
+    border: dashed red;
+  }
+}

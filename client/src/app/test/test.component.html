@@ -1,1 +1,29 @@
-<p>test works!</p>
+<div class="container">
+  <div class="test-header">
+    <span class="test-name">{{ test.name }}</span>
+  </div>
+
+  <div class="test-body">
+    <div *ngFor="let question of test.questions" class="question">
+      <span>{{ question.text }}</span>
+      <div *ngFor="let answer of question.answers">
+        <input
+          [value]="answer.id"
+          type="radio"
+          name="{{ question.id }}"
+          (click)="answerQuestion(question, answer.id)"
+        />
+        {{ answer.text }}
+      </div>
+    </div>
+  </div>
+  <div class="test-footer">
+    <button
+      class="submit-btn"
+      (click)="submitTest()"
+      [disabled]="!isAllQuestionsAnswered()"
+    >
+      Submit
+    </button>
+  </div>
+</div>

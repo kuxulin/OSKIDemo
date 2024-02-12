@@ -1,0 +1,43 @@
+.container {
+  min-height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: thick double black;
+
+  .test-header {
+    padding: 5px;
+
+    .test-name {
+      font-size: 75px;
+      font-weight: bolder;
+    }
+  }
+
+  .test-body {
+    width: 70%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+
+    .question {
+      height: 20%;
+      margin: 4%;
+      padding: 1%;
+      border: 2px solid grey;
+    }
+  }
+  .test-footer {
+    width: 40%;
+    min-height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1%;
+
+    .submit-btn {
+      cursor: pointer;
+    }
+  }
+}

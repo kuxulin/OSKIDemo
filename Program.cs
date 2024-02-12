@@ -12,6 +12,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(swagger =>
@@ -41,7 +42,7 @@ builder.Services.AddSwaggerGen(swagger =>
 });
 
 builder.Services.AddDbContext<DataContext>(options =>
-         options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionLocalString"))); 
+         options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionLocalString")));
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
     {
@@ -76,6 +77,8 @@ builder.Services.AddScoped<ITestRepository, TestRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
+
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 using (var scope = app.Services.CreateScope())
 {

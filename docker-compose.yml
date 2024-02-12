@@ -12,3 +12,9 @@ services:
     environment:
       - ACCEPT_EULA=y
       - MSSQL_SA_PASSWORD=Pass2wor!d
+  app:
+    image: client
+    container_name: angular_client
+    ports:
+      - "4200:4201"
+    working_dir: /usr/src/app
